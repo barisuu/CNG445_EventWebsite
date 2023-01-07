@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>{{ eventInfo[1] }}</td>
+        </tr>
+        <tr>
+            <th>Desc</th>
+            <td>{{ eventInfo[2] }}</td>
+        </tr>
+        <tr>
+            <th>Location</th>
+            <td>{{ eventInfo[7] }}</td>
+        </tr>
+        <tr>
+            <th>City</th>
+            <td>{{ eventInfo[10] }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ eventInfo[3] }}</td>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <td>{{ eventInfo[4] }}</td>
+        </tr>
+        <tr>
+            <th>Time</th>
+            <td>{{ eventInfo[5] }}</td>
+        </tr>
+    </table>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Return to homepage</a></li>
+    </ul>
+</body>
+</html>

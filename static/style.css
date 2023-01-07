@@ -1,0 +1,16 @@
+body{
+    background-color: cadetblue;
+}
+.cityName{
+    font-weight: bold;
+}
+table, th, td{
+    border:1px solid black;
+}
+label, input {
+    display: block;
+}
+
+label {
+    margin-bottom: 20px;
+}

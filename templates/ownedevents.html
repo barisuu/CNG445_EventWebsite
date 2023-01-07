@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>{{username}}'s events</h1>
+
+{% for a in cityInfo %}
+{% if cityInfo[a]["noOfEvents"]>0 %}
+<h2 class="cityName">{{ cityInfo[a]["cityName"] }}</h2>
+<table id={{ a }}>
+    <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th></th>
+    </tr>
+    {% for event in cityInfo[a]["events"] %}
+    <tr>
+        <td>{{ event["name"] }}</td>
+        <td>{{ event["location"] }}</td>
+        <td>{{ event["price"] }}</td>
+        <td>{{ event["date"] }}</td>
+        <td>{{ event["time"] }}</td>
+        <td><a href="{{ url_for('eventInfo', id=event['eventid']) }}">See More</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{%endif%}
+{%endfor%}
+<ul>
+  <li><a href="{{ url_for('index') }}">Return to homepage</a></li>
+</ul>
+</body>
+</html>

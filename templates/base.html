@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Welcome</h1>
+<ul>
+    {% if "username" in session %}
+    <li><a href="{{ url_for('newEvent') }}">Add Event</a></li>
+    <li><a href="{{ url_for('ownEvents') }}">Show own events</a></li>
+    <li><a href="{{ url_for('logout') }}">Log out</a></li>
+    {% else %}
+    <form action="/login" method="POST">
+        <p>Username: <input type="text" name="username"/></p>
+        <p>Password: <input type="password" name="password"/></p>
+        <p><input type="submit" value="Login"></p>
+        {%if errorMsg%}
+        <p>{{errorMsg}}</p>
+        {%endif%}
+    </form>
+    <li><a href="{{url_for('register') }}">Register</a></li>
+    {% endif %}
+</ul>
+
+<section>
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+     {% block content %}{% endblock %}
+</section>
+</body>
+</html>

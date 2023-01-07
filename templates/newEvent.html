@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Event</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <form action="/addevent" method="POST">
+        <label for='eventname'>Event Name:  <input type="text" name="eventname" id="eventname" required /> </label>
+
+        <label for='description'>Description: </label>
+        <input type="text" name="description" id="description" required /> <br/>
+
+        <label for='location'>Event location: </label>
+        <input type="text" name="location" id="location" required /> <br/>
+
+
+        <label for="cities">Choose a city:</label>
+        <select name="cities" id="cities">
+            {% for a in cityInfo %}
+            <option value={{ a[0] }}>{{a[1]}}</option>
+            {%endfor%}
+        </select>
+
+        <label for='price'>Price: </label>
+        <input type="text" name="price" id="price" required /> <br/>
+
+        <label for='date'>Date: </label>
+        <input type="date" name="date" id="date" required /> <br/>
+
+        <label for='time'>Time: </label>
+        <input type="time" name="time" id="time" required /> <br/>
+
+        <input type="submit" value="Submit"><br/>
+
+        <p><a href="{{ url_for('index') }}">Abort and return to homepage</a></p>
+    </form>
+</body>
+
+
+
+</html>

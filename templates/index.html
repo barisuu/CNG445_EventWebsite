@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}<h1>Events</h1>{% endblock %}
+
+{% block content %}
+    {% for a in cityInfo %}
+        <p class="cityName">{{ cityInfo[a]["cityName"] }}</p>
+        {% if cityInfo[a]["noOfEvents"]>0 %}
+            <table id={{ a }}>
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th></th>
+                </tr>
+                {% for event in cityInfo[a]["events"] %}
+                <tr>
+                    <td>{{ event["name"] }}</td>
+                    <td>{{ event["location"] }}</td>
+                    <td>{{ event["price"] }}</td>
+                    <td>{{ event["date"] }}</td>
+                    <td>{{ event["time"] }}</td>
+                    <td><a href="{{ url_for('eventInfo', id=event['eventid']) }}">See More</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No events</p>
+        {%endif%}
+    {%endfor%}
+{% endblock %}

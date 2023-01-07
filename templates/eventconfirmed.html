@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Your event has been created with the following info: </p>
+<ul>
+  <li>Name: {{eventname}}</li>
+  <li>Description: {{description}}</li>
+  <li>Location: {{location}}</li>
+  <li>City: {{city}}</li>
+  <li>Price: {{price}}</li>
+  <li>Date: {{date}}</li>
+  <li>Time: {{time}}</li>
+</ul>
+
+<ul>
+  <li><a href="{{ url_for('newEvent') }}">Create another event</a></li>
+  <li><a href="{{ url_for('index') }}">Return to homepage</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Event</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <form action="/applyregister" method="POST">
+        <label for='username'>Username: </label>
+        <input type="text" name="username" id="username" required /> <br/>
+        <label for='password'>Password: </label>
+        <input type="password" name="password" id="password" required /> <br/>
+        <label for='fname'>First Name: </label>
+        <input type="text" name="fname" id="fname" required/> <br/>
+        <label for='lname'>Last Name: </label>
+        <input type="text" name="lname" id="lname" required /> <br/>
+        <label for='email'>Email: </label>
+        <input type="text" name="email" id="email" required/> <br/>
+        <input type="submit" value="Register">
+        {% if errorMsg %}
+        <p > {{errorMsg}} </p>
+        {%endif%}
+        <p><a href="{{ url_for('index') }}">Abort and return to homepage</a></p>
+    </form>
+</body>
+</html>
