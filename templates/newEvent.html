@@ -4,6 +4,53 @@
     <meta charset="UTF-8">
     <title>Add New Event</title>
     <link rel="stylesheet" href="/static/style.css">
+
+
+    <script>
+
+	function validate(){
+		var eventname = document.forms["registration"]["eventname"].value;
+		var description = document.forms["registration"]["description"].value;
+		var location = document.forms["registration"]["location"].value;
+		var cities = document.forms["registration"]["cities"].value;
+		var price = document.forms["registration"]["price"].value;
+        var date = document.forms["registration"]["date"].value;
+		var time = document.forms["registration"]["time"].value;
+
+		if(eventname==""){
+			window.alert("No event name");
+			return false;
+		}
+		else if (description ==""){
+			window.alert("No descriiption");
+			return false;
+		}
+		else if(location ==""){
+			window.alert("No location");
+			return false;
+		}
+		else if(cities == ""){
+			window.alert("No city selected");
+			return false;
+		}
+		else if(price == ""){
+			widow.alert("No price");
+			return false;
+		}
+		else if(date == ""){
+			window.alert("No date selected");
+			return false;
+		}
+		else if(time == ""){
+			widow.alert("No time slot selected");
+			return false;
+		}
+
+          // Password is valid
+          return true;
+	}
+	</script>
+
 </head>
 <body>
     <form action="/addevent" method="POST" class="register-form">

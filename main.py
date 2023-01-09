@@ -19,11 +19,12 @@ def search(db_file, key):
 
     c.execute("SELECT * FROM event WHERE name=keyword OR decription = keyword OR price = keyword OR location = keyword OR time = keyword OR date = keyword")
     result = c.fetchone()
+
+    c.execute("SELECT * FROM event WHERE name OR decrption OR location OR price LIKE '%{}%'".format(course))
+    result = c.fetchone()
+
     conn.close()
     return render_template("serchResult.html", Result=result)
-
-
-
 
 def validatePassword(password):
     #Regex expression of password criteria.

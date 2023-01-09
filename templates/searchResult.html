@@ -9,9 +9,9 @@
 <h1>{{username}}'s events</h1>
 
 {% for a in Result %}
-{% if Result[a]["noOfEvents"]>0 %}
+{% if Result["noOfEvents"]>0 %}
 <div class="table">
-<h2 class="cityName">{{ Result[a]["eventid"] }}</h2>
+<h2 class="cityName">{{ Result["eventid"] }}</h2>
 <table id={{ a }} >
     <tr>
         <th>Name</th>

@@ -4,13 +4,72 @@
     <meta charset="UTF-8">
     <title>Add New Event</title>
     <link rel="stylesheet" href="/static/style.css">
+
+    <script>
+
+	function validate(){
+		var username = document.forms["registration"]["username"].value;
+		var pwd = document.forms["registration"]["pwd"].value;
+		var fname = document.forms["registration"]["fname"].value;
+		var lname = document.forms["registration"]["lname"].value;
+		var email = document.forms["registration"]["email"].value;
+
+		if(username==""){
+			window.alert("No username");
+			return false;
+		}
+		else if (pwd ==""){
+			window.alert("No password");
+			return false;
+		}
+		else if(fname ==""){
+			window.alert("No first name");
+			return false;
+		}
+		else if(lname == ""){
+			window.alert("No last name");
+			return false;
+		}
+		else if(email == ""){
+			widow.alert("No email");
+			return false;
+		}
+
+         if (pwd.length < 8) {
+             window.alert("Password too short");
+             return false;
+          }
+
+          // Check for uppercase letter
+          if (!/[A-Z]/.test(pwd)) {
+              window.alert("Password must contain uppercase letter");
+              return false;
+          }
+
+          // Check for lowercase letter
+          if (!/[a-z]/.test(pwd)) {
+                window.alert("Password must contain uppercase letter");
+                return false;
+          }
+
+          // Check for number
+          if (!/[0-9]/.test(pwd)) {
+              window.alert("Password must contain number");
+                return false;
+          }
+
+          // Password is valid
+          return true;
+	}
+	</script>
+
 </head>
 <body>
-    <form action="/applyregister" method="POST" class="register-form">
+    <form action="/applyregister" method="POST" class="login-form"  onsubmit="return validate()" name = "registration">
         <label for='username' class="input-margin">Username: </label>
         <input type="text" name="username" id="username" required /> <br/>
         <label for='password' class="input-margin">Password: </label>
-        <input type="password" name="password" id="password" required /> <br/>
+        <input type="password" name="pwd" id="password" required /> <br/>
         <label for='fname' class="input-margin">First Name: </label>
         <input type="text" name="fname" id="fname" required/> <br/>
         <label for='lname' class="input-margin">Last Name: </label>
