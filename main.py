@@ -13,14 +13,7 @@ def search(db_file, key):
     c = conn.cursor()
     keyword = escape(request.form["key"])
 
-    # Get a list of all tables in the database
-    c.execute("SELECT name FROM event")
-    table = c.fetchall()
-
-    c.execute("SELECT * FROM event WHERE name=keyword OR decription = keyword OR price = keyword OR location = keyword OR time = keyword OR date = keyword")
-    result = c.fetchone()
-
-    c.execute("SELECT * FROM event WHERE name OR decrption OR location OR price LIKE '%{}%'".format(course))
+    c.execute("SELECT * FROM event WHERE name LIKE 'keyword%' OR decrption LIKE 'keyword%' OR location LIKE 'keyword%' OR price LIKE 'keyword%'")
     result = c.fetchone()
 
     conn.close()
