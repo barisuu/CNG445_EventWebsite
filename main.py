@@ -7,6 +7,17 @@ app.secret_key = "ced428fab82a18422645f3e5"
 
 import sqlite3
 
+@app.route("/search", methods=["GET"])
+def search(db_file, key):
+    conn = sqlite3.connect("eventwebsite.db")
+    c = conn.cursor()
+    keyword = escape(request.form["key"])
+
+    c.execute("SELECT * FROM event WHERE name LIKE 'keyword%' OR decrption LIKE 'keyword%' OR location LIKE 'keyword%' OR price LIKE 'keyword%'")
+    result = c.fetchone()
+
+    conn.close()
+    return render_template("serchResult.html", Result=result)
 
 def validatePassword(password):
     #Regex expression of password criteria.
@@ -39,23 +50,22 @@ def index(errorMsg=None):
             "events": []
         }
 
-    c.execute("SELECT event.* FROM event JOIN city c on c.cityID = event.cityID AND event.isActive!=0 ORDER BY date DESC")
+    c.execute("SELECT event.* FROM event JOIN city c on c.cityID = event.cityID")
     rows = c.fetchall()
 
     for tupleInfo in rows:
         if tupleInfo[8] in cities:
             cities[tupleInfo[8]]["noOfEvents"] += 1
-            if len(cities[tupleInfo[8]]["events"])<5:
-                cities[tupleInfo[8]]["events"].append({
-                    "eventid":tupleInfo[0],
-                    "name":tupleInfo[1],
-                    "description":tupleInfo[2],
-                    "price":tupleInfo[3],
-                    "date":tupleInfo[4],
-                    "time":tupleInfo[5],
-                    "isActive":1,
-                    "location":tupleInfo[7],
-                })
+            cities[tupleInfo[8]]["events"].append({
+                "eventid":tupleInfo[0],
+                "name":tupleInfo[1],
+                "description":tupleInfo[2],
+                "price":tupleInfo[3],
+                "date":tupleInfo[4],
+                "time":tupleInfo[5],
+                "isActive":1,
+                "location":tupleInfo[7],
+            })
     #If username is in session that info will be sent during rendering as well.
     if 'username' in session:
         return render_template("index.html", username=session['username'],cityInfo=cities)
@@ -64,51 +74,6 @@ def index(errorMsg=None):
             return render_template("index.html", cityInfo=cities,errorMsg=errorMsg)
         else:
             return render_template("index.html",cityInfo=cities)
-
-@app.route("/search", methods=["GET","POST"])
-def search():
-    if request.method == "POST":
-        conn = sqlite3.connect("eventwebsite.db")
-        c = conn.cursor()
-        keyword = escape(request.form["keyword"])
-
-        c.execute("SELECT * FROM city ORDER BY cityID")
-        rows = c.fetchall()
-
-        cities = {}
-        for nameTuple in rows:
-            cities[nameTuple[0]] = {
-                "cityName": str(nameTuple[1]),
-                "noOfEvents": 0,
-                "events": []
-            }
-
-        c.execute("SELECT event.*,c.cityname FROM event JOIN city c on c.cityID = event.cityID AND event.isActive!=0 WHERE event.name LIKE (?) OR description LIKE (?) OR location LIKE (?) OR price LIKE (?) ORDER BY date DESC",(keyword,keyword,keyword,keyword,))
-        rows = c.fetchall()
-
-        conn.close()
-
-
-
-        for tupleInfo in rows:
-            if tupleInfo[8] in cities:
-                cities[tupleInfo[8]]["noOfEvents"] += 1
-                cities[tupleInfo[8]]["events"].append({
-                    "eventid": tupleInfo[0],
-                    "name": tupleInfo[1],
-                    "description": tupleInfo[2],
-                    "price": tupleInfo[3],
-                    "date": tupleInfo[4],
-                    "time": tupleInfo[5],
-                    "isActive": tupleInfo[6],
-                    "location": tupleInfo[7],
-                })
-
-        return render_template("searchResult.html", Result=cities)
-    elif request.method == "GET":
-        pass
-
-
 
 @app.route("/register")
 def register():
@@ -183,20 +148,6 @@ def newEvent():
         return render_template("newEvent.html",cityInfo=cities)
     return redirect(url_for("index"))
 
-@app.route("/inactive")
-def setInactive():
-
-    eventID = request.args.get('id')
-    conn = sqlite3.connect("eventwebsite.db")
-    c = conn.cursor()
-    c.execute("UPDATE event SET isActive=0 WHERE eventid=(?)",(eventID,))
-    conn.commit()
-    conn.close()
-
-
-    return redirect(url_for('ownEvents'))
-
-
 @app.route("/addevent", methods=["GET", "POST"])
 def addEvent():
     if (request.method == "POST" and "username" in session):
@@ -257,7 +208,7 @@ def ownEvents():
             "events": []
         }
 
-    c.execute("SELECT event.*,c.cityname FROM event JOIN city c on c.cityID = event.cityID AND event.isActive!=0 WHERE username=(?) ORDER BY date DESC",(str(session["username"]),))
+    c.execute("SELECT event.*,c.cityname FROM event JOIN city c on c.cityID = event.cityID WHERE username=(?)",(str(session["username"]),))
     rows = c.fetchall()
 
     for tupleInfo in rows:
@@ -270,7 +221,7 @@ def ownEvents():
                 "price":tupleInfo[3],
                 "date":tupleInfo[4],
                 "time":tupleInfo[5],
-                "isActive":tupleInfo[6],
+                "isActive":1,
                 "location":tupleInfo[7],
             })
     #If username is in session that info will be sent during rendering as well.

@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<h1>Search result</h1>
+<h1>{{username}}'s events</h1>
 
 {% for a in Result %}
-{% if Result[a]["noOfEvents"]>0 %}
+{% if Result["noOfEvents"]>0 %}
 <div class="table">
-<h2 class="cityName">{{ Result[a]["eventid"] }}</h2>
+<h2 class="cityName">{{ Result["eventid"] }}</h2>
 <table id={{ a }} >
     <tr>
         <th>Name</th>
@@ -21,13 +21,13 @@
         <th>Time</th>
         <th></th>
     </tr>
-    {% for event in Result[a]["events"] %}
+    {% for event in Result %}
     <tr>
-        <td>{{ event["name"] }}</td>
-        <td>{{ event["location"] }}</td>
-        <td>{{ event["price"] }}</td>
-        <td>{{ event["date"] }}</td>
-        <td>{{ event["time"] }}</td>
+        <td>{{ Result["name"] }}</td>
+        <td>{{ Result["location"] }}</td>
+        <td>{{ Result["price"] }}</td>
+        <td>{{ Result["date"] }}</td>
+        <td>{{ Result["time"] }}</td>
         <td><a href="{{ url_for('eventInfo', id=event['eventid']) }}">See More</a></td>
     </tr>
     {% endfor %}
