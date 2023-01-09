@@ -53,7 +53,7 @@
 
 </head>
 <body>
-    <form action="/addevent" method="POST" class="register-form">
+    <form action="/addevent" method="POST" class="register-form" onsubmit="return validate()">
         <label for='eventname'>Event Name: </label>
         <input type="text" name="eventname" id="eventname" required /><br/>
         <label for='description'>Description: </label>

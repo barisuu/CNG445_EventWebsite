@@ -21,12 +21,12 @@ def insertRecord(dbname):
 
     c.execute("INSERT OR IGNORE INTO event(name,description,price,date,time,location,cityID) VALUES(?,?,?,?,?,?,?)",("TestEv", "TestDec", "TestP", "1-1-1111", "11:11","TestLoc","2"))
 
-#    c.execute("INSERT INTO city(cityname) VALUES('Lefkosa')")
-#    c.execute("INSERT INTO city(cityname) VALUES('Girne')")
-#    c.execute("INSERT INTO city(cityname) VALUES('Guzelyurt')")
-#    c.execute("INSERT INTO city(cityname) VALUES('Gazi Magusa')")
-#    c.execute("INSERT INTO city(cityname) VALUES('Lefke')")
-#    c.execute("INSERT INTO city(cityname) VALUES('Iskele')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Lefkosa')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Girne')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Guzelyurt')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Gazi Magusa')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Lefke')")
+    c.execute("INSERT OR IGNORE INTO city(cityname) VALUES('Iskele')")
 
     conn.commit()
 
