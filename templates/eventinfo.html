@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <table>
+<div class="table">
+
+    <table align="center" >
         <tr>
             <th>Name</th>
             <td>{{ eventInfo[1] }}</td>
@@ -36,8 +38,8 @@
             <td>{{ eventInfo[5] }}</td>
         </tr>
     </table>
-    <ul>
-        <li><a href="{{ url_for('index') }}">Return to homepage</a></li>
-    </ul>
+    <div class="empty-space"></div>
+    <a href="{{ url_for('index') }}" class="btn">Return to homepage</a>
+</div>
 </body>
 </html>

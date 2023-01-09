@@ -6,22 +6,22 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <form action="/applyregister" method="POST">
-        <label for='username'>Username: </label>
+    <form action="/applyregister" method="POST" class="register-form">
+        <label for='username' class="input-margin">Username: </label>
         <input type="text" name="username" id="username" required /> <br/>
-        <label for='password'>Password: </label>
+        <label for='password' class="input-margin">Password: </label>
         <input type="password" name="password" id="password" required /> <br/>
-        <label for='fname'>First Name: </label>
+        <label for='fname' class="input-margin">First Name: </label>
         <input type="text" name="fname" id="fname" required/> <br/>
-        <label for='lname'>Last Name: </label>
+        <label for='lname' class="input-margin">Last Name: </label>
         <input type="text" name="lname" id="lname" required /> <br/>
-        <label for='email'>Email: </label>
+        <label for='email' class="input-margin">Email: </label>
         <input type="text" name="email" id="email" required/> <br/>
         <input type="submit" value="Register">
         {% if errorMsg %}
-        <p > {{errorMsg}} </p>
+        <p> {{errorMsg}} </p>
         {%endif%}
-        <p><a href="{{ url_for('index') }}">Abort and return to homepage</a></p>
+        <p> <a href="{{ url_for('index') }}" class="btn">Abort and return to homepage</a></p>
     </form>
 </body>
 </html>

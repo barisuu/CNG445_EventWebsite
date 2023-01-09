@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-<body>
-
-<p>Your event has been created with the following info: </p>
-<ul>
-  <li>Name: {{eventname}}</li>
-  <li>Description: {{description}}</li>
-  <li>Location: {{location}}</li>
-  <li>City: {{city}}</li>
-  <li>Price: {{price}}</li>
-  <li>Date: {{date}}</li>
-  <li>Time: {{time}}</li>
-</ul>
-
-<ul>
-  <li><a href="{{ url_for('newEvent') }}">Create another event</a></li>
-  <li><a href="{{ url_for('index') }}">Return to homepage</a></li>
-</ul>
+<body >
+<div class="register-form">
+  <p>Your event has been created with the following info: </p>
+  <ul>
+    <li>Name: {{eventname}}</li>
+    <li>Description: {{description}}</li>
+    <li>Location: {{location}}</li>
+    <li>City: {{city}}</li>
+    <li>Price: {{price}}</li>
+    <li>Date: {{date}}</li>
+    <li>Time: {{time}}</li>
+  </ul>
+  <a href="{{ url_for('newEvent') }}" class="btn" >Create another event</a>
+  <div class="empty-space"></div>
+  <a href="{{ url_for('index') }}" class="btn">Return to homepage</a>
+</div>
 </body>
 </html>

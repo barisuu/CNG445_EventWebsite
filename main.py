@@ -5,6 +5,26 @@ import re
 app = Flask(__name__)
 app.secret_key = "ced428fab82a18422645f3e5"
 
+import sqlite3
+
+@app.route("/search", methods=["GET"])
+def search(db_file, key):
+    conn = sqlite3.connect("eventwebsite.db")
+    c = conn.cursor()
+    keyword = escape(request.form["key"])
+
+    # Get a list of all tables in the database
+    c.execute("SELECT name FROM event")
+    table = c.fetchall()
+
+    c.execute("SELECT * FROM event WHERE name=keyword OR decription = keyword OR price = keyword OR location = keyword OR time = keyword OR date = keyword")
+    result = c.fetchone()
+    conn.close()
+    return render_template("serchResult.html", Result=result)
+
+
+
+
 def validatePassword(password):
     #Regex expression of password criteria.
     expression = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
@@ -146,11 +166,12 @@ def addEvent():
         date = str(escape(request.form["date"]))
         time = str(escape(request.form["time"]))
         user = session["username"]
+        isActive = 1
 
         conn = sqlite3.connect("eventwebsite.db")
         c = conn.cursor()
-        c.execute("INSERT INTO event(name,description,price,date,time,location,cityID,username) VALUES(?,?,?,?,?,?,?,?)",
-                  (eventName, desc, price, date, time,location, city,user))
+        c.execute("INSERT INTO event(name,description,price,date,time,isActive,location,cityID,username) VALUES(?,?,?,?,?,?,?,?,?)",
+                  (eventName, desc, price, date, time,isActive,location, city,user))
 
         c.execute("SELECT cityname FROM city WHERE cityID=(?)",(city))
         row=c.fetchone()
